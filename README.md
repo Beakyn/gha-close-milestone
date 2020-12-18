@@ -1,4 +1,4 @@
-# Release Notes Format
+# Close Milestone
 
 Action to close milestone
 
@@ -20,8 +20,7 @@ Create a workflow .yml file in your .github/workflows directory. An example work
 - name: Close milestone
   uses: Beakyn/close-milestone@master
   with:
-    # required
     github-token: ${{ github.token }}
     repository: ${{ github.repository }}
-    milestone: ${{ github.event.inputs.milestone }}
+    milestone: 1
 ```
