@@ -6,7 +6,7 @@ function getInputs() {
   
   const repository = core.getInput('repository', requiredOptions);
   const milestone = core.getInput("milestone", requiredOptions);
-  const token = core.getInput("github-token", requiredOptions);
+  const token = process.env.GITHUB_TOKEN;
 
   return {
     repository,

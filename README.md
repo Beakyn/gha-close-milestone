@@ -8,8 +8,6 @@ Create a workflow .yml file in your .github/workflows directory. An example work
 
 ## Inputs
 
-`github-token`: Github token. Add the Github context value: `github.token`. (**required**)
-
 `repository`: Github repository. Add the Github context value: `github.repository`. (**required**)
 
 `milestone`: Milestone id, not title please. (**required**)
@@ -19,8 +17,9 @@ Create a workflow .yml file in your .github/workflows directory. An example work
 ```yaml
 - name: Close milestone
   uses: Beakyn/close-milestone@master
+  env:
+    GITHUB_TOKEN: ${{ github.token }}
   with:
-    github-token: ${{ github.token }}
     repository: ${{ github.repository }}
     milestone: 1
 ```
