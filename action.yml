@@ -1,0 +1,15 @@
+name: "Close milestone"
+description: "Close milestone"
+inputs:
+  milestone:
+    description: "Milestone number to be closed"
+    required: true
+  repository:
+    description: "owner/repository name"
+    required: true
+  github-token:
+    description: "Github token"
+    required: true
+runs:
+  using: "node12"
+  main: "./index.js"
