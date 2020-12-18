@@ -5,12 +5,12 @@ function getInputs() {
   const requiredOptions = { required: true };
   
   const repository = core.getInput('repository', requiredOptions);
-  const milestoneNumber = core.getInput("milestone-number", requiredOptions);
+  const milestone = core.getInput("milestone", requiredOptions);
   const token = core.getInput("token", requiredOptions);
 
   return {
     repository,
-    milestoneNumber,
+    milestone,
     token,
   };
 }
@@ -19,13 +19,13 @@ async function run() {
   try {
     const {
       repository,
-      milestoneNumber,
+      milestone,
       token,
     } = getInputs();
     const octokit = github.getOctokit(token);
 
     await octokit.request(`PATCH /repos/${repository}/milestones/{milestone_number}`, {  
-      milestone_number: milestoneNumber,
+      milestone_number: milestone,
       state: 'closed',
     });
     console.log(`Closed milestone ${milestoneName}`);
