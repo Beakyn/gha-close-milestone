@@ -28,7 +28,7 @@ async function run() {
       milestone_number: milestone,
       state: 'closed',
     });
-    console.log(`Closed milestone ${milestoneName}`);
+    console.log(`Closed milestone ${milestone}`);
   } catch (error) {
     console.log('Error => ', error);
     core.setFailed(error.message);
