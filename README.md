@@ -1,3 +1,5 @@
+<img src="https://beakyn.com/assets/beakyn-logo-v2-color.png" height="40" />
+
 # Close Milestone
 
 Action to close milestone
