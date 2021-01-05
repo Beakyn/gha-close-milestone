@@ -16,7 +16,7 @@ Create a workflow .yml file in your .github/workflows directory. An example work
 
 ```yaml
 - name: Close milestone
-  uses: Beakyn/close-milestone@master
+  uses: Beakyn/gha-close-milestone@master
   env:
     GITHUB_TOKEN: ${{ github.token }}
   with:
