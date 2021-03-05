@@ -30,6 +30,7 @@ async function run() {
     const octokit = github.getOctokit(token);
 
     if(milestone_number) {
+      console.log("Closing milestone by number");
       await octokit.issues.updateMilestone({
         owner,
         repo,
@@ -37,6 +38,7 @@ async function run() {
         state: 'closed'
       });
     } else if(milestone_title) {
+      console.log("Closing milestone by title");
       const openMilestones = await octokit.issues.listMilestones({
         owner,
         repo,
@@ -52,6 +54,7 @@ async function run() {
         });
       }
     } else {
+      console.log("Could not find milestone-number or milestone-title")
       return;
     }
 
