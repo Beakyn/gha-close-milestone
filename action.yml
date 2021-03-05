@@ -1,9 +1,12 @@
 name: "Close Milestone Action"
 description: "Close a specific Milestone"
 inputs:
-  milestone:
+  milestone-number:
     description: "Milestone number to be closed"
-    required: true
+    required: false
+  milestone-title:
+    description: "Milestone title to be closed"
+    required: false
   repository:
     description: "owner/repository name"
     required: true
