@@ -45,21 +45,20 @@ async function run() {
         repo,
         state: 'open'
       });
-      const result = openMilestones.data.filter(x => x.title === milestone_title)
-      if (result && result.milestone) {
+      const [milestone] = openMilestones.data.filter(x => x.title === milestone_title)
+      if (milestone) {
         await octokit.issues.updateMilestone({
           owner,
           repo,
           milestone_number: milestone.number,
           state: 'closed'
         });
+        console.log(`Closed milestone ${milestone.number} with title ${milestone.title}`);
       }
-      console.log(`Closed milestone ${milestone_title}`);
     } else {
       console.log("Could not find milestone-number or milestone-title")
       return;
     }
-
   } catch (error) {
     console.log('Error => ', error);
     core.setFailed(error.message);
