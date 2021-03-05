@@ -5,12 +5,14 @@ function getInputs() {
   const requiredOptions = { required: true };
   
   const repository = core.getInput('repository', requiredOptions);
-  const milestone = core.getInput("milestone", requiredOptions);
+  const milestone_number = core.getInput("milestone-number");
+  const milestone_title = core.getInput("milestone-title");
   const token = process.env.GITHUB_TOKEN;
 
   return {
     repository,
-    milestone,
+    milestone_number,
+    milestone_title,
     token,
   };
 }
@@ -19,15 +21,40 @@ async function run() {
   try {
     const {
       repository,
-      milestone,
+      milestone_number,
+      milestone_title,
       token,
     } = getInputs();
+
+    const [owner, repo] = repository ? repository : github.context;
     const octokit = github.getOctokit(token);
 
-    await octokit.request(`PATCH /repos/${repository}/milestones/{milestone_number}`, {  
-      milestone_number: milestone,
-      state: 'closed',
-    });
+    if(milestone_number) {
+      await octokit.issues.updateMilestone({
+        owner,
+        repo,
+        milestone_number,
+        state: 'closed'
+      });
+    } else if(milestone_title) {
+      const openMilestones = await octokit.issues.listMilestones({
+        owner,
+        repo,
+        state: 'open'
+      });
+      const [milestone] = openMilestones.data.filter(x => x.title === milestone_title)
+      if (milestone) {
+        await octokit.issues.updateMilestone({
+          owner,
+          repo,
+          milestone_number: milestone.number,
+          state: 'closed'
+        });
+      }
+    } else {
+      return;
+    }
+
     console.log(`Closed milestone ${milestone}`);
   } catch (error) {
     console.log('Error => ', error);

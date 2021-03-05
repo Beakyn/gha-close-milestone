@@ -12,9 +12,9 @@ Create a workflow .yml file in your .github/workflows directory. An example work
 
 `repository`: Github repository. Add the Github context value: `github.repository`. (**required**)
 
-`milestone`: Milestone id, not title please. (**required**)
+Either `milestone-number` or `milestone-title` is required.
 
-## Example
+## Examples
 
 ```yaml
 - name: Close milestone
@@ -23,5 +23,15 @@ Create a workflow .yml file in your .github/workflows directory. An example work
     GITHUB_TOKEN: ${{ github.token }}
   with:
     repository: ${{ github.repository }}
-    milestone: 1
+    milestone-number: 1
+```
+
+```yaml
+- name: Close milestone
+  uses: Beakyn/gha-close-milestone@master
+  env:
+    GITHUB_TOKEN: ${{ github.token }}
+  with:
+    repository: ${{ github.repository }}
+    milestone-title: v1.1.1
 ```
