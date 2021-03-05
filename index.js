@@ -25,10 +25,10 @@ async function run() {
       milestone_title,
       token,
     } = getInputs();
-
+    
     const [owner, repo] = repository ? repository.split('/') : github.context;
     const octokit = github.getOctokit(token);
-
+    
     if(milestone_number) {
       console.log(`Closing milestone with number ${milestone_number}`);
       await octokit.issues.updateMilestone({
@@ -37,6 +37,7 @@ async function run() {
         milestone_number,
         state: 'closed'
       });
+      console.log(`Closed milestone ${milestone_number}`);
     } else if(milestone_title) {
       console.log(`Closing milestone with title ${milestone_title}`);
       const openMilestones = await octokit.issues.listMilestones({
@@ -44,9 +45,7 @@ async function run() {
         repo,
         state: 'open'
       });
-      console.log(openMilestones)
       const result = openMilestones.data.filter(x => x.title === milestone_title)
-      console.log(result)
       if (result && result.milestone) {
         await octokit.issues.updateMilestone({
           owner,
@@ -55,12 +54,12 @@ async function run() {
           state: 'closed'
         });
       }
+      console.log(`Closed milestone ${milestone_title}`);
     } else {
       console.log("Could not find milestone-number or milestone-title")
       return;
     }
 
-    console.log(`Closed milestone ${milestone}`);
   } catch (error) {
     console.log('Error => ', error);
     core.setFailed(error.message);
