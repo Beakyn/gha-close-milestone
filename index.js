@@ -26,7 +26,7 @@ async function run() {
       token,
     } = getInputs();
 
-    const [owner, repo] = repository ? repository : github.context;
+    const [owner, repo] = repository ? repository.split('/') : github.context;
     const octokit = github.getOctokit(token);
 
     if(milestone_number) {
