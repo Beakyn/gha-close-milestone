@@ -44,6 +44,7 @@ async function run() {
         repo,
         state: 'open'
       });
+      console.log(openMilestones)
       const [milestone] = openMilestones.data.filter(x => x.title === milestone_title)
       if (milestone) {
         await octokit.issues.updateMilestone({
