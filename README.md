@@ -1,4 +1,4 @@
-<img src="https://beakyn.com/assets/beakyn-logo-v2-color.png" height="40" />
+<img src="https://beakyn.com/assets/beakyn-logo-v2-color.png" alt="Beakyn" height="40" />
 
 # Close Milestone
 
