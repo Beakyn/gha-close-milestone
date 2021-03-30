@@ -18,7 +18,7 @@ Either `milestone-number` or `milestone-title` is required.
 
 ```yaml
 - name: Close milestone
-  uses: Beakyn/gha-close-milestone@master
+  uses: Beakyn/gha-close-milestone@v1.1.1
   env:
     GITHUB_TOKEN: ${{ github.token }}
   with:
@@ -28,7 +28,7 @@ Either `milestone-number` or `milestone-title` is required.
 
 ```yaml
 - name: Close milestone
-  uses: Beakyn/gha-close-milestone@master
+  uses: Beakyn/gha-close-milestone@v1.1.1
   env:
     GITHUB_TOKEN: ${{ github.token }}
   with:
